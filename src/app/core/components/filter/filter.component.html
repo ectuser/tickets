@@ -1,0 +1,13 @@
+<mat-card class="filter">
+  <h2 class="filter__title">Filter</h2>
+  <div class="filter__body transfers">
+    <div class="transfers__item">
+      <mat-checkbox [ngModel]="checkAllControl" (change)="onCheckAll($event)">All</mat-checkbox>
+    </div>
+    <ng-container [formGroup]="form">
+      <div *ngFor="let item of formTransfers; let index = index" class="transfers__item">
+        <mat-checkbox [formControlName]="item">{{item}} Transfer</mat-checkbox>
+      </div>
+    </ng-container>
+  </div>
+</mat-card>

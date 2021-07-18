@@ -1,0 +1,9 @@
+<app-header></app-header>
+<section class="main">
+  <div class="main__filter main__element">
+    <app-filter [transfers]="transfers$ | async" (updateFilter)="updateFilter($event)"></app-filter>
+  </div>
+  <div class="main__content main__element">
+    <router-outlet></router-outlet>
+  </div>
+</section>
