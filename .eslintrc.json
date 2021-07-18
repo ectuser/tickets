@@ -21,7 +21,8 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:ngrx/recommended"
       ],
       "rules": {
         "@angular-eslint/component-selector": [
@@ -40,8 +41,18 @@
             "type": "attribute"
           }
         ],
-        "no-console": ["error", { "allow": ["warn", "error"]}],
-        "no-debugger": ["error"],
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "warn",
+              "error"
+            ]
+          }
+        ],
+        "no-debugger": [
+          "error"
+        ],
         "no-empty": "error",
         "no-eval": "error",
         "no-shadow": "off",
@@ -64,21 +75,36 @@
         ],
         "radix": "error",
         "no-redeclare": "error",
-
         "@typescript-eslint/unbound-method": [
           "error",
           {
             "ignoreStatic": true
           }
         ],
-        "@typescript-eslint/no-floating-promises": ["off"],
-        "@typescript-eslint/no-unsafe-assignment": ["off"],
-        "@typescript-eslint/no-unsafe-member-access": ["off"],
-        "@typescript-eslint/no-empty-interface": ["off"],
-        "@typescript-eslint/no-inferrable-types": ["warn"],
-        "@typescript-eslint/no-unsafe-call": ["warn"],
-        "@typescript-eslint/restrict-plus-operands": ["warn"],
-        "@typescript-eslint/restrict-template-expressions": ["warn"],
+        "@typescript-eslint/no-floating-promises": [
+          "off"
+        ],
+        "@typescript-eslint/no-unsafe-assignment": [
+          "off"
+        ],
+        "@typescript-eslint/no-unsafe-member-access": [
+          "off"
+        ],
+        "@typescript-eslint/no-empty-interface": [
+          "off"
+        ],
+        "@typescript-eslint/no-inferrable-types": [
+          "warn"
+        ],
+        "@typescript-eslint/no-unsafe-call": [
+          "warn"
+        ],
+        "@typescript-eslint/restrict-plus-operands": [
+          "warn"
+        ],
+        "@typescript-eslint/restrict-template-expressions": [
+          "warn"
+        ],
         "lines-between-class-members": "off",
         "@typescript-eslint/lines-between-class-members": [
           "error",
@@ -122,13 +148,18 @@
         "@typescript-eslint/no-unused-expressions": [
           "warn"
         ]
-      }
+      },
+      "plugins": [
+        "ngrx"
+      ]
     },
     {
       "files": [
         "*.html"
       ],
-      "excludedFiles": ["*inline-template-*.component.html"],
+      "excludedFiles": [
+        "*inline-template-*.component.html"
+      ],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
         "plugin:prettier/recommended"
