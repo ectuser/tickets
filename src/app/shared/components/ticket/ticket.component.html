@@ -1,0 +1,29 @@
+<mat-card *ngIf="ticket" class="ticket">
+  <section class="ticket__header">
+    <div class="ticket__price">{{ticket.price | money}}</div>
+    <div class="ticket__company">
+      <img [src]="ticket.carrier | companyImage" [alt]="ticket.carrier" />
+    </div>
+  </section>
+  <section class="description">
+    <div *ngFor="let segment of ticket.segments" class="description__flight">
+      <div class="description__item">
+        <div class="description__up">{{segment.origin}} - {{segment.destination}}</div>
+        <div class="description__down">{{segment | flightStartEnd}}</div>
+      </div>
+      <div class="description__item">
+        <div class="description__up">DURATION</div>
+        <div class="description__down">{{segment.duration | time}}</div>
+      </div>
+      <div class="description__item">
+        <ng-container *ngIf="!!segment.stops.length; else direct">
+          <div class="description__up">{{segment.stops.length}} TRANSFERS</div>
+          <div class="description__down">{{segment.stops.join(', ')}}</div>
+        </ng-container>
+        <ng-template #direct>
+          <div class="description__direct">DIRECT</div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+</mat-card>

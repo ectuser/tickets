@@ -4,6 +4,14 @@
     <app-filter [transfers]="transfers$ | async" (updateFilter)="updateFilter($event)"></app-filter>
   </div>
   <div class="main__content main__element">
-    <router-outlet></router-outlet>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link (click)="updateSort(link.id)" *ngFor="let link of links" [active]="(activeSearchType$ | async) === link.id">
+        {{link.name}}
+      </a>
+    </nav>
+    <app-tickets *ngIf="(ticketsLoading$ | async) === false; else loader" [tickets]="tickets$ | async"></app-tickets>
+    <ng-template #loader>
+      <app-loader></app-loader>
+    </ng-template>
   </div>
 </section>

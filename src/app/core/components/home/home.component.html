@@ -1,1 +1,4 @@
-<button mat-raised-button>Start</button>
+<button *ngIf="(isTokenLoading$ | async) === false; else loader" mat-raised-button (click)="start()">Start</button>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

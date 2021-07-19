@@ -1,0 +1,8 @@
+.tickets {
+  margin-top: 20px;
+  &__ticket {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}

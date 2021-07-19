@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
   Output,
   SimpleChanges,
-  EventEmitter,
-  OnInit,
-  OnDestroy,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 const FILTER_DELAY = 400;
@@ -26,7 +26,7 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
   @Input() transfers: number[] | null = [];
   @Output() updateFilter = new EventEmitter();
 
-  checkAllControl = false;
+  checkAllControl = new FormControl(false);
 
   form = new FormGroup({});
 
@@ -45,12 +45,18 @@ export class FilterComponent implements OnInit, OnChanges, OnDestroy {
         takeUntil(this.unsubscribe)
       )
       .subscribe((status) => {
-        this.checkAllControl = status;
+        this.checkAllControl.patchValue(status);
       });
 
-    this.form.valueChanges.pipe(debounceTime(FILTER_DELAY), takeUntil(this.unsubscribe)).subscribe(() => {
-      this.updateFilter.emit(this.form.value);
-    });
+    this.form.valueChanges
+      .pipe(
+        debounceTime(FILTER_DELAY),
+        distinctUntilChanged((prev, next) => JSON.stringify(prev) === JSON.stringify(next)),
+        takeUntil(this.unsubscribe)
+      )
+      .subscribe(() => {
+        this.updateFilter.emit(this.form.value);
+      });
   }
 
   ngOnDestroy(): void {

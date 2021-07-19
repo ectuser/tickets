@@ -147,6 +147,12 @@
         "no-unused-expression": "off",
         "@typescript-eslint/no-unused-expressions": [
           "warn"
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
         ]
       },
       "plugins": [
@@ -164,7 +170,14 @@
         "plugin:@angular-eslint/template/recommended",
         "plugin:prettier/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ]
+      }
     }
   ]
 }
