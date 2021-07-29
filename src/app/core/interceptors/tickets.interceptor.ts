@@ -5,11 +5,15 @@ import { Store } from '@ngrx/store';
 import { selectToken } from '@store/auth/auth.selectors';
 import { catchError, mergeMap, retryWhen, switchMap, take } from 'rxjs/operators';
 import { logout } from '@store/auth/auth.actions';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+const LOGOUT_SNACKBAR_DURATION = 10000;
+const RETRY_SNACKBAR_DURATION = 4000;
 
 @Injectable()
 export class TicketsInterceptor implements HttpInterceptor {
   token$ = this.store.select(selectToken);
-  constructor(private store: Store) {}
+  constructor(private store: Store, private snackBar: MatSnackBar) {}
 
   // todo - add tests
 
@@ -38,12 +42,14 @@ export class TicketsInterceptor implements HttpInterceptor {
             if (retryAttempt > maxRetryAttempts || error.status !== statusCodeToRetry) {
               return throwError(error);
             }
+            this.snackBar.open('There is probably a network issue. Trying again', undefined, { duration: RETRY_SNACKBAR_DURATION });
             return timer(retryAttempt * scalingDuration);
           })
         );
       }),
       catchError((error) => {
         this.store.dispatch(logout());
+        this.snackBar.open('Your session has been expired. Please sign in again', undefined, { duration: LOGOUT_SNACKBAR_DURATION });
         throw error;
       })
     );

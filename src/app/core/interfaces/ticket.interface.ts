@@ -1,4 +1,4 @@
-import { Segment } from '@core/interceptors/segment.interface';
+import { Segment } from '@core/interfaces/segment.interface';
 
 export interface Ticket {
   price: number;

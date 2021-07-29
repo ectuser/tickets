@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { CompanyImagePipe } from './pipes/company-image.pipe';
 import { TimePipe } from './pipes/time.pipe';
 import { MoneyPipe } from './pipes/money.pipe';
 import { FlightStartEndPipe } from './pipes/flight-start-end.pipe';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [LoaderComponent, TicketComponent, CompanyImagePipe, TimePipe, MoneyPipe, FlightStartEndPipe],
@@ -26,6 +27,7 @@ import { FlightStartEndPipe } from './pipes/flight-start-end.pipe';
     MatTabsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatCardModule,
@@ -37,6 +39,7 @@ import { FlightStartEndPipe } from './pipes/flight-start-end.pipe';
     MatProgressSpinnerModule,
     LoaderComponent,
     TicketComponent,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}

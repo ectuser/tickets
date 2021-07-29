@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Segment } from '@core/interceptors/segment.interface';
+import { Segment } from '@core/interfaces/segment.interface';
 import { DatePipe } from '@angular/common';
 
 @Pipe({
